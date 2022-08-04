@@ -45,13 +45,13 @@ jobs:
         - run:
             name: Create Deployment
             command: |
-              cd ../kuberenets
+              cd .circleci/kuberenets
               kubectl create -f deployment.yml
    
         - run:
             name: Create Service
             command: |
-              cd ../kuberenets
+              cd .circleci/kuberenets
               kubectl create -f service.yml        
          
           
