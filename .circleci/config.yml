@@ -35,7 +35,7 @@ jobs:
         - run:
             name: Initalize Gcloud
             command: |
-             ls
+            
              gcloud auth activate-service-account $SERVICE_ACCT --key-file=.circleci/key.json
              gcloud config set project $PROJECT_ID
              apt-get install kubectl
@@ -52,7 +52,12 @@ jobs:
             name: Create Service
             command: |
               cd .circleci/kuberenets
-              kubectl create -f services.yml || true   
+              kubectl create -f services.yml || true
+
+        - run:
+            name: Start Autoscaler
+            command: |
+              kubectl autoscale deployment chat-app --cpu-percent=50 --min=1 --max=5
          
           
 workflows:
