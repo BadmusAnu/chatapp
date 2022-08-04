@@ -52,7 +52,7 @@ jobs:
             name: Create Service
             command: |
               cd .circleci/kuberenets
-              kubectl create -f service.yml        
+              kubectl create -f services.yml        
          
           
 workflows:
