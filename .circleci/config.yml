@@ -35,7 +35,7 @@ jobs:
         - run:
             name: Initalize Gcloud
             command: |
-             gcloud auth activate-service-account $SERVICE_ACCT --key-file=/path/key.json
+             gcloud auth activate-service-account $SERVICE_ACCT --key-file=/key.json
              gcloud config set project $PROJECT_ID
              gcloud components install kubectl
              gcloud components install gke-gcloud-auth-plugin
