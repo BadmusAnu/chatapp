@@ -46,13 +46,13 @@ jobs:
             name: Create Deployment
             command: |
               cd .circleci/kuberenets
-              kubectl create -f deployment.yml || true
+              kubectl create -f deployment.yml
    
         - run:
             name: Create Service
             command: |
               cd .circleci/kuberenets
-              kubectl create -f services.yml || true
+              kubectl create -f services.yml
 
         - run:
             name: Start Autoscaler
