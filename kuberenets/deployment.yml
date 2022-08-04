@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-app
+spec:
+  selector:
+    matchLabels:
+      app: chat-app
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: chat-app
+    spec:
+      containers:
+      - name: chat-app
+        image: badmusanu/chatapp
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000

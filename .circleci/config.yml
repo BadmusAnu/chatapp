@@ -1,0 +1,65 @@
+version: 2.1
+
+jobs:
+  analyse:
+    docker:
+      - image: cimg/node:18.7.0
+    steps:
+      - checkout
+      - run:
+          name: Security Check
+          command: |
+            npm audit fix --force
+
+
+  build:
+    docker:
+      - image: docker:stable
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: build application
+          command: |
+
+            echo $DOCKERHUB_PASS | docker login -u $DOCKERHUB_USER --password-stdin
+            docker build -t badmusanu/chatapp .
+            docker push badmusanu/chatapp
+               
+  deploy:  
+    docker:
+      - image: google/cloud-sdk
+    steps:
+        - checkout
+        
+        - run:
+            name: Initalize Gcloud
+            command: |
+             gcloud auth activate-service-account $SERVICE_ACCT --key-file=/path/key.json
+             gcloud config set project $PROJECT_ID
+             gcloud components install kubectl
+             gcloud components install gke-gcloud-auth-plugin
+             gcloud container clusters get-credentials $CLUSTER_NAME
+
+        
+        - run:
+            name: Create Deployment
+            command: |
+              cd ../kuberenets
+              kubectl create -f deployment.yml
+   
+        - run:
+            name: Create Service
+            command: |
+              cd ../kuberenets
+              kubectl create -f service.yml        
+         
+          
+workflows:
+  default:
+    jobs:
+      - analyse
+      - build:
+         requires: [analyse] 
+      - deploy:
+          requires: [build]
