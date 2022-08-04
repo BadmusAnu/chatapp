@@ -38,7 +38,7 @@ jobs:
              ls
              gcloud auth activate-service-account $SERVICE_ACCT --key-file=.circleci/key.json
              gcloud config set project $PROJECT_ID
-             sudo apt-get install kubectl
+             apt-get install kubectl
              gcloud container clusters get-credentials $CLUSTER_NAME
 
         
