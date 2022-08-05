@@ -1,6 +1,9 @@
 # Chatapp
 Just a simple app chat to learn how socket.io works
 
+#Architecture
+![alt text](https://github.com/BadmusAnu/chatapp/blob/master/arch.png)
+
 # GCP GKE Hosted app
 Chat is hosted on GCP GKE and available in http://35.202.25.24:3000
 
