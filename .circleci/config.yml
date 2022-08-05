@@ -68,3 +68,6 @@ workflows:
          requires: [analyse] 
       - deploy:
           requires: [build]
+          filters:
+            branches:
+              only: [master]
