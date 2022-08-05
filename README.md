@@ -1,7 +1,7 @@
 # Chatapp
 Just a simple app chat to learn how socket.io works
 
-#Architecture
+# Architecture
 ![alt text](https://github.com/BadmusAnu/chatapp/blob/master/arch.png)
 
 # GCP GKE Hosted app
